@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex justify-content-center align-items-center py-4">
+    <div class="bg-warning text-center p-4 rounded mt-4">
+        <h2 class="bg-warning text-white p-2 fw-normal rounded">Informações do Imóvel</h2>
+        <form id="formImovel">
+            <div class="form-group my-2">
+                <input type="text" id="estado" class="form-control" placeholder="Estado" required>
+            </div>
+    
+            <div class="form-group my-2">
+                <input type="text" id="cidade" class="form-control" placeholder="Cidade" required>
+            </div>
+    
+            <div class="form-group my-2">
+                <input type="text" id="bairro" class="form-control" placeholder="Bairro" required>
+            </div>
+    
+            <div class="form-check-inline my-2">
+                <input type="checkbox" id="quintal" class="form-check-input">
+                <label for="quintal" class="form-check-label mr-3">Quintal</label>
+            </div>
+    
+            <div class="form-check-inline my-2">
+                <input type="checkbox" id="terraco" class="form-check-input">
+                <label for="terraco" class="form-check-label">Terraço</label>
+            </div>
+    
+            <div class="form-group my-2">
+                <select id="andares" class="form-control" required>
+                    <option value="0">Nenhum (térreo)</option>
+                    <option value="1">1 Andar</option>
+                    <option value="2">2 Andares</option>
+                    <option value="3">3 Andares</option>
+                    <option value="4">Mais de 3 Andares</option>
+                </select>
+            </div>
+    
+            <div class="form-group my-2">
+                <select id="tipoImovel" class="form-control" required>
+                    <option value="casa">Casa</option>
+                    <option value="apartamento">Apartamento</option>
+                    <option value="condominio">Condomínio</option>
+                    <option value="kitnet">Kitnet</option>
+                </select>
+            </div>
+    
+            <button type="submit" class="btn btn-primary w-50 my-2">Enviar</button>
+        </form>
+    </div>
+</body>
+
+</html>
