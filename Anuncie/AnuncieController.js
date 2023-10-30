@@ -1,24 +1,70 @@
+//importar dependências
+const mysql = require('mysql');
+const ImovelView = require('./AnuncieViews');
+//importar a classe ImovelView
+const imovelView = new ImovelView();
 
-// Importe os módulos e configure a rota
-const express = require('express');
-const router = express.Router();
+const ImovelModel = require('./AnuncieModels');
 
-const ImovelModel = require('../models/imovelModel'); // Importa o modelo de imóvel
 
-// Controlador para manipular os dados do imóvel
-class ImovelController {
-  constructor() {
-    this.imoveis = []; // Você pode usar um array para armazenar os imóveis ou integrar com o banco de dados
+// Crie a conexão com o MySQL
+const connection = mysql.createConnection({
+  host: 'seu-host',
+  user: 'seu-usuario',
+  password: 'sua-senha',
+  database: 'seu-banco-de-dados',
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Erro ao conectar ao MySQL:', err);
+  } else {
+    console.log('Conexão com o MySQL estabelecida com sucesso.');
   }
+});
 
-  // Método para adicionar um imóvel
-  adicionarImovel(estado, cidade, bairro, quintal, terraco, andares, tipoImovel) {
-    const novoImovel = new ImovelModel(estado, cidade, bairro, quintal, terraco, andares, tipoImovel);
-    this.imoveis.push(novoImovel); // Adiciona o imóvel ao array (ou ao banco de dados)
-  }
 
-  // Outros métodos para manipular os dados do imóvel podem ser adicionados aqui
+//função para persistir os dados do imovel no banco de dados
+
+function salvarImovel(estado, cidade, bairro, quintal, terraco, andares, tipoImovel) {
+  // Crie uma instância da classe ImovelModel com os dados
+  const imovel = new ImovelModel(estado, cidade, bairro, quintal, terraco, andares, tipoImovel);
+
+  // Use os métodos do modelo para obter os dados do imóvel
+  const dadosImovel = {
+    estado: imovel.estado,
+    cidade: imovel.cidade,
+    bairro: imovel.bairro,
+    quintal: imovel.quintal,
+    terraco: imovel.terraco,
+    andares: imovel.andares,
+    tipoImovel: imovel.tipoImovel,
+  };
+
+  // Execute a consulta SQL para inserir os dados na tabela ImovelDados
+  const sql = 'INSERT INTO ImovelDados (estado, cidade, bairro, quintal, terraco, andares, tipoImovel) VALUES (?, ?, ?, ?, ?, ?, ?)';
+  const values = [dadosImovel.estado, dadosImovel.cidade, dadosImovel.bairro, dadosImovel.quintal, dadosImovel.terraco, dadosImovel.andares, dadosImovel.tipoImovel];
+
+  connection.query(sql, values, (err, results) => {
+    if (err) {
+      console.error(err);
+      console.log('error');
+    } else {
+      console.log('Imóvel adicionado com sucesso!');
+      // Você pode retornar um feedback de sucesso para a View
+    }
+  });
 }
 
-// Exporta uma instância do controlador para que possa ser utilizada em outros arquivos
-module.exports = new ImovelController();
+module.exports = {
+  salvarImovel, // Exporte a função para que ela possa ser usada em outras partes do código
+};
+
+
+
+
+
+
+
+
+

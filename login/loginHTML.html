@@ -4,36 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo personalizado */
+        body {
+            background-color: #f0f0f0; /* Cor de fundo cinza claro mais claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-   
+        .formulario {
+            background-color: #f5f5f5; /* Cor de fundo cinza claro mais escuro */
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px; /* Largura do formulário */
+            margin: 0 auto; /* Centralizando o formulário */
+        }
 
+        .formulario label {
+            color: black; /* Cor do texto dos rótulos */
+        }
+
+        .formulario button {
+            background-color: #f36a22; /* Cor laranja para o botão */
+            width: 100%; /* Largura total */
+        }
+    </style>
 </head>
 
-
-
 <body class="body">
-    
-    <form class="formulario" id="loginformid">
-        <div >
-            <label for="username">Usuário</label>
-            <input type="text" id="loginusuarioid" name="username" required>
-        </div>
-        <div>
-            <label for="password">Senha</label>
-            <input type="password" id="loginsenhaid" name="password" required>
-        
-            <div>
-        <button type="submit" >Login</button>
+    <div class="container-md">
+        <form class="formulario" id="loginformid">
+            <div class="mb-3">
+                <input type="text" id="loginusuarioid" name="username" class="form-control" placeholder="Usuário" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" id="loginsenhaid" name="password" class="form-control" placeholder="Senha" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
     </div>
-    </div>
-    </form>
-
-
-  
 </body>
 
-<script src="login.js", src="servidor.js"></script>
+
 
 
 </html>
