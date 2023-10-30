@@ -1,3 +1,5 @@
+const { validarCadastro, salvarNoBancoDeDados } = require('./CadastroController');
+
 class UsuarioViews {
   constructor(controller) {
     this.controller = controller;
@@ -6,7 +8,7 @@ class UsuarioViews {
     this.passwordInput = document.getElementById('senhaid');
     this.registrarButton = document.getElementById('registrar-btn');
 
-    // Adicione outros elementos aqui, se necessário
+    // evento de click
     this.registrarButton.addEventListener('click', this.handleCadastrarClick.bind(this));
   }
 
@@ -15,11 +17,13 @@ class UsuarioViews {
     const email = this.emailInput.value;
     const password = this.passwordInput.value;
 
-    // Chame o método do Controller para validar o cadastro
-    const cadastroValido = this.controller.validarCadastro(username, email, password);
+    // chamando a função de validação
+    const cadastroValido = validarCadastro(username, email, password);
 
     if (cadastroValido) {
-      window.location.href = 'login.html';  // Substitua 'login.html' pelo nome da sua próxima página
+      // chama a função para salvar no banco de dados
+      salvarNoBancoDeDados(username, email, password);
+      window.location.href = 'login.html'; // cadastro bem-sucedido, vai para a página de login
     } else {
       alert('Cadastro inválido. Preencha todos os campos.');
     }

@@ -1,3 +1,6 @@
+
+const UsuarioModels = require('./CadastroModels');
+
 class UsuarioModel {
     constructor(username, email, password) {
         this.username = username;

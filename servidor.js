@@ -20,7 +20,7 @@ connection.connect((err) => {
 // Crie as tabelas aqui:
 
 
-const createUsuarioTableQuery = `
+const TabelaUsuario = `
     CREATE TABLE IF NOT EXISTS Usuario (
       id INT AUTO_INCREMENT PRIMARY KEY,
       username VARCHAR(255) NOT NULL,
@@ -29,7 +29,7 @@ const createUsuarioTableQuery = `
     )
   `;
 
-  connection.query(createUsuarioTableQuery, (err, results) => {
+  connection.query(TabelaUsuario, (err, results) => {
     if (err) {
       console.error('Erro ao criar a tabela Usuario:', err);
     } else {
