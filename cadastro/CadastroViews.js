@@ -1,33 +1,36 @@
-const { validarCadastro, salvarNoBancoDeDados } = require('./CadastroController');
+const { validarCadastro, salvarUsuario } = require('./CadastroController');
 
-class UsuarioViews {
-  constructor(controller) {
-    this.controller = controller;
-    this.usernameInput = document.getElementById('usuarioid');
-    this.emailInput = document.getElementById('emailid');
-    this.passwordInput = document.getElementById('senhaid');
-    this.registrarButton = document.getElementById('registrar-btn');
 
-    // evento de click
-    this.registrarButton.addEventListener('click', this.handleCadastrarClick.bind(this));
-  }
 
-  handleCadastrarClick() {
-    const username = this.usernameInput.value;
-    const email = this.emailInput.value;
-    const password = this.passwordInput.value;
 
-    // chamando a função de validação
-    const cadastroValido = validarCadastro(username, email, password);
+function registrarUsuario() {
+  const username = document.getElementById('usuarioid').value;
+  const email = document.getElementById('emailid').value;
+  const password = document.getElementById('senhaid').value;
 
-    if (cadastroValido) {
-      // chama a função para salvar no banco de dados
-      salvarNoBancoDeDados(username, email, password);
-      window.location.href = 'login.html'; // cadastro bem-sucedido, vai para a página de login
-    } else {
-      alert('Cadastro inválido. Preencha todos os campos.');
-    }
-  }
+  // Chamar a função de registro no backend
+  fetch('/register', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+  })
+  .then(response => response.json())
+  .then(data => {
+      // Lidar com a resposta do servidor
+      if (data.success) {
+          // Redirecionar para a página de dashboard ou exibir uma mensagem de sucesso
+          window.location.href = '/dex';
+      } else {
+          // Exibir mensagem de erro (você pode adicionar um elemento HTML para exibir mensagens)
+          console.error(data.message);
+      }
+  })
+  .catch(error => {
+      console.error('Erro ao fazer a solicitação:', error);
+  });
+
+  // Impede o formulário de ser enviado normalmente
+  return false;
 }
-
-module.exports = UsuarioViews;
